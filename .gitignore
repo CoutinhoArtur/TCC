@@ -1,0 +1,25 @@
+
+# Configurações privadas
+.env
+.env.*
+!.env.example
+
+# Dependências
+/vendor/
+/node_modules/
+
+# Arquivos temporários
+*.log
+*.tmp
+*.cache
+
+# Configurações locais
+.vscode/
+.idea/
+
+# Arquivos do Windows
+Thumbs.db
+Desktop.ini
+
+# Configurações locais do banco
+app/config/database.local.php
