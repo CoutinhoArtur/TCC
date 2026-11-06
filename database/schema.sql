@@ -252,7 +252,7 @@ CREATE TABLE contratacoes (
         'ajustes_solicitados',
         'concluida',
         'cancelada'
-    ) NOT NULL DEFAULT 'ativa',
+    ) NOT NULL DEFAULT 'em_andamento',
     data_aceite DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     data_inicio DATETIME NULL DEFAULT NULL,
     data_entrega DATETIME NULL DEFAULT NULL,

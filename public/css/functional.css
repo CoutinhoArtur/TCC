@@ -1,0 +1,164 @@
+/* ==========================================================
+   COMPONENTES FUNCIONAIS
+   ==========================================================
+   Estilos simples para formulários, filtros e ações das
+   funcionalidades adicionadas. A identidade visual completa
+   será refinada na fase visual do projeto.
+   ========================================================== */
+
+.form-card,
+.projeto-card {
+    border: 1px solid var(--cor-borda);
+    border-radius: 14px;
+    padding: 22px;
+    background: var(--branco);
+    margin-bottom: 16px;
+}
+
+.projeto-card-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.projeto-status {
+    display: inline-flex;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: #f1ebff;
+    color: var(--cor-primaria);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.projeto-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    color: var(--cor-texto-secundario);
+}
+
+.projeto-meta strong {
+    color: var(--cor-texto);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.form-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-campo.full {
+    grid-column: 1 / -1;
+}
+
+.form-campo label {
+    font-weight: 600;
+}
+
+.form-campo input,
+.form-campo select,
+.form-campo textarea {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 9px;
+    background: #fff;
+}
+
+.form-campo textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-acoes,
+.acoes-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.botao-secundario,
+.botao-perigo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    background: #f4f4f6;
+    color: #333;
+}
+
+.botao-perigo {
+    background: #fff0f0;
+    color: #b42318;
+}
+
+.alerta-sucesso,
+.alerta-erro,
+.alerta-info {
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+.alerta-sucesso { background: #ecfdf3; color: #027a48; }
+.alerta-erro { background: #fff0f0; color: #b42318; }
+.alerta-info { background: #f5f3ff; color: #5b21b6; }
+
+.filtros {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    align-items: end;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tag {
+    display: inline-flex;
+    padding: 6px 9px;
+    border-radius: 999px;
+    background: var(--cor-fundo-suave);
+    border: 1px solid var(--cor-borda);
+    font-size: 13px;
+}
+
+.habilidade-linha {
+    display: grid;
+    grid-template-columns: 1fr 180px auto;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.lista-simples {
+    display: grid;
+    gap: 14px;
+}
+
+@media (max-width: 900px) {
+    .form-grid,
+    .filtros {
+        grid-template-columns: 1fr;
+    }
+
+    .habilidade-linha {
+        grid-template-columns: 1fr;
+    }
+}

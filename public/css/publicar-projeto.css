@@ -1,0 +1,311 @@
+/* ==========================================================
+   PUBLICAÇÃO DE PROJETO / BRIEFING GUIADO
+   ==========================================================
+   Estilos utilizados nas etapas de criação de projeto.
+
+   Responsável por:
+   - estrutura da página;
+   - formulário;
+   - campos;
+   - botão de continuar;
+   - cabeçalho;
+   - indicação da etapa;
+   - responsividade.
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   FUNDO DA PÁGINA
+   ---------------------------------------------------------- */
+
+body {
+    background-color: #faf9fd;
+}
+
+
+/* ==========================================================
+   CONTAINER PRINCIPAL
+   ========================================================== */
+
+.briefing-container {
+    width: min(900px, calc(100% - 40px));
+
+    margin: 0 auto;
+
+    padding: 35px 0 60px;
+}
+
+
+/* ==========================================================
+   VOLTAR
+   ========================================================== */
+
+.briefing-voltar {
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-bottom: 35px;
+
+    color: var(--cor-texto-secundario);
+
+    font-size: 15px;
+}
+
+.briefing-voltar:hover {
+    color: var(--cor-primaria);
+}
+
+
+/* ==========================================================
+   CABEÇALHO
+   ========================================================== */
+
+.briefing-header {
+    margin-bottom: 30px;
+}
+
+
+.briefing-saudacao {
+    color: var(--cor-primaria);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+
+.briefing-header h1 {
+    font-size: 36px;
+
+    line-height: 1.2;
+
+    margin-bottom: 12px;
+}
+
+
+.briefing-header > p:last-child {
+    max-width: 650px;
+
+    color: var(--cor-texto-secundario);
+
+    font-size: 16px;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================================
+   CARD DO FORMULÁRIO
+   ========================================================== */
+
+.briefing-card {
+    padding: 35px;
+
+    border: 1px solid #e2d8ff;
+
+    border-radius: 18px;
+
+    background-color: var(--branco);
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.04);
+}
+
+
+/* ----------------------------------------------------------
+   INDICAÇÃO DA ETAPA
+   ---------------------------------------------------------- */
+
+.briefing-etapa {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    padding: 7px 12px;
+
+    border-radius: 30px;
+
+    background-color: var(--cor-primaria-clara);
+
+    color: var(--cor-primaria);
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.briefing-card h2 {
+    margin-bottom: 28px;
+
+    font-size: 24px;
+}
+
+
+/* ==========================================================
+   CAMPOS DO FORMULÁRIO
+   ========================================================== */
+
+.campo {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    margin-bottom: 24px;
+}
+
+
+.campo label {
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+
+/* Texto auxiliar usado abaixo de perguntas. */
+
+.campo small {
+    color: var(--cor-texto-secundario);
+
+    font-size: 13px;
+}
+
+
+/* ----------------------------------------------------------
+   INPUT, SELECT E TEXTAREA
+   ---------------------------------------------------------- */
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #d9d9d9;
+
+    border-radius: 10px;
+
+    background-color: var(--branco);
+
+    color: var(--cor-texto);
+
+    outline: none;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+
+/* Quando o usuário seleciona o campo. */
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    border-color: var(--cor-primaria);
+
+    box-shadow: 0 0 0 3px rgba(108, 53, 255, 0.12);
+}
+
+
+/* Placeholder dos campos. */
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #aaaaaa;
+}
+
+
+/* Textarea pode aumentar verticalmente,
+   mas não horizontalmente. */
+
+.campo textarea {
+    min-height: 130px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================================
+   AÇÕES DO FORMULÁRIO
+   ========================================================== */
+
+.briefing-acoes {
+    display: flex;
+
+    justify-content: flex-end;
+
+    margin-top: 30px;
+}
+
+
+/* ----------------------------------------------------------
+   BOTÃO CONTINUAR
+   ---------------------------------------------------------- */
+
+.botao-continuar {
+    min-width: 160px;
+
+    padding: 13px 24px;
+
+    border-radius: 10px;
+
+    background-color: var(--cor-primaria);
+
+    color: var(--branco);
+
+    font-weight: 600;
+
+    transition:
+        opacity 0.2s,
+        transform 0.2s;
+}
+
+
+.botao-continuar:hover {
+    opacity: 0.9;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+    .briefing-container {
+        width: min(100% - 28px, 900px);
+
+        padding-top: 25px;
+    }
+
+
+    .briefing-header h1 {
+        font-size: 28px;
+    }
+
+
+    .briefing-card {
+        padding: 24px 18px;
+    }
+
+
+    .briefing-acoes {
+        justify-content: stretch;
+    }
+
+
+    .botao-continuar {
+        width: 100%;
+    }
+
+}

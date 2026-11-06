@@ -1,0 +1,434 @@
+/* ==========================================================
+   CHAT - SITEMATCH
+   ==========================================================
+   Estilos da área de negociação entre cliente
+   e desenvolvedor.
+
+   O chat só existe quando já existe uma proposta.
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   PÁGINA
+   ---------------------------------------------------------- */
+
+body {
+    background-color: #f8f6fc;
+}
+
+
+/* ==========================================================
+   CONTAINER PRINCIPAL
+   ========================================================== */
+
+.chat-container {
+    width: min(1000px, calc(100% - 40px));
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    padding: 30px 0;
+}
+
+
+/* ==========================================================
+   VOLTAR
+   ========================================================== */
+
+.chat-voltar {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    color: var(--cor-primaria);
+
+    font-size: 15px;
+}
+
+
+/* ==========================================================
+   CARD PRINCIPAL
+   ========================================================== */
+
+.chat-card {
+    display: flex;
+
+    flex-direction: column;
+
+    height: calc(100vh - 100px);
+
+    min-height: 600px;
+
+    overflow: hidden;
+
+    border: 1px solid #e1d9f5;
+
+    border-radius: 20px;
+
+    background-color: var(--branco);
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ==========================================================
+   CABEÇALHO DA CONVERSA
+   ========================================================== */
+
+.chat-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 22px 25px;
+
+    border-bottom: 1px solid #eeeeee;
+
+    background-color: var(--branco);
+}
+
+
+.chat-header-info h1 {
+    margin-bottom: 5px;
+
+    font-size: 20px;
+}
+
+
+.chat-header-info p {
+    color: var(--cor-texto-secundario);
+
+    font-size: 14px;
+}
+
+
+/* ----------------------------------------------------------
+   STATUS DA NEGOCIAÇÃO
+   ---------------------------------------------------------- */
+
+.chat-status {
+    padding: 7px 12px;
+
+    border-radius: 30px;
+
+    background-color: var(--cor-primaria-clara);
+
+    color: var(--cor-primaria);
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   ÁREA DAS MENSAGENS
+   ========================================================== */
+
+.chat-mensagens {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 28px;
+
+    background-color: #fbf8ff;
+}
+
+
+/* ----------------------------------------------------------
+   CHAT VAZIO
+   ---------------------------------------------------------- */
+
+.chat-vazio {
+    display: flex;
+
+    height: 100%;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    color: var(--cor-texto-secundario);
+}
+
+
+.chat-vazio-conteudo {
+    max-width: 420px;
+}
+
+
+.chat-vazio h2 {
+    margin-bottom: 10px;
+
+    color: var(--cor-texto);
+
+    font-size: 22px;
+}
+
+
+/* ==========================================================
+   LINHA DE MENSAGEM
+   ========================================================== */
+
+.mensagem-linha {
+    display: flex;
+
+    margin-bottom: 18px;
+}
+
+
+/* Mensagem enviada pelo usuário logado. */
+
+.mensagem-linha.minha {
+    justify-content: flex-end;
+}
+
+
+/* Mensagem recebida. */
+
+.mensagem-linha.outra {
+    justify-content: flex-start;
+}
+
+
+/* ==========================================================
+   BOLHA
+   ========================================================== */
+
+.mensagem-bolha {
+    max-width: 68%;
+
+    padding: 13px 16px;
+
+    border-radius: 16px;
+
+    line-height: 1.4;
+
+    word-break: break-word;
+}
+
+
+/* Minha mensagem. */
+
+.mensagem-linha.minha .mensagem-bolha {
+    border-bottom-right-radius: 5px;
+
+    background-color: #d9abff;
+}
+
+
+/* Mensagem da outra pessoa. */
+
+.mensagem-linha.outra .mensagem-bolha {
+    border-bottom-left-radius: 5px;
+
+    background-color: #eeeeee;
+}
+
+
+/* ----------------------------------------------------------
+   NOME DO REMETENTE
+   ---------------------------------------------------------- */
+
+.mensagem-remetente {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* ----------------------------------------------------------
+   CONTEÚDO
+   ---------------------------------------------------------- */
+
+.mensagem-conteudo {
+    font-size: 15px;
+}
+
+
+/* ----------------------------------------------------------
+   HORÁRIO
+   ---------------------------------------------------------- */
+
+.mensagem-horario {
+    display: block;
+
+    margin-top: 7px;
+
+    text-align: right;
+
+    font-size: 11px;
+
+    opacity: 0.65;
+}
+
+
+/* ==========================================================
+   ERRO
+   ========================================================== */
+
+.chat-erro {
+    margin: 0 25px 15px;
+
+    padding: 11px 14px;
+
+    border-radius: 9px;
+
+    background-color: #fff0f0;
+
+    color: #b42318;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================================
+   ÁREA DE ENVIO
+   ========================================================== */
+
+.chat-form-area {
+    padding: 18px 22px;
+
+    border-top: 1px solid #eeeeee;
+
+    background-color: var(--branco);
+}
+
+
+.chat-form {
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 12px;
+}
+
+
+/* ----------------------------------------------------------
+   CAMPO DA MENSAGEM
+   ---------------------------------------------------------- */
+
+.chat-form textarea {
+    flex: 1;
+
+    min-height: 48px;
+    max-height: 130px;
+
+    padding: 13px 15px;
+
+    resize: vertical;
+
+    border: 1px solid #d8d8d8;
+
+    border-radius: 14px;
+
+    outline: none;
+
+    line-height: 1.4;
+}
+
+
+.chat-form textarea:focus {
+    border-color: var(--cor-primaria);
+
+    box-shadow: 0 0 0 3px rgba(108, 53, 255, 0.12);
+}
+
+
+/* ----------------------------------------------------------
+   BOTÃO ENVIAR
+   ---------------------------------------------------------- */
+
+.chat-enviar {
+    min-width: 110px;
+
+    min-height: 48px;
+
+    padding: 10px 20px;
+
+    border-radius: 12px;
+
+    background-color: var(--cor-primaria);
+
+    color: var(--branco);
+
+    font-weight: 600;
+}
+
+
+.chat-enviar:hover {
+    opacity: 0.9;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width: 700px) {
+
+    .chat-container {
+        width: 100%;
+
+        padding: 0;
+    }
+
+
+    .chat-card {
+        height: 100vh;
+
+        min-height: 100vh;
+
+        border: none;
+
+        border-radius: 0;
+    }
+
+
+    .chat-voltar {
+        display: none;
+    }
+
+
+    .chat-header {
+        padding: 18px;
+    }
+
+
+    .chat-mensagens {
+        padding: 18px 14px;
+    }
+
+
+    .mensagem-bolha {
+        max-width: 85%;
+    }
+
+
+    .chat-form-area {
+        padding: 12px;
+    }
+
+
+    .chat-form {
+        gap: 8px;
+    }
+
+
+    .chat-enviar {
+        min-width: auto;
+
+        padding: 10px 15px;
+    }
+
+}
