@@ -75,8 +75,10 @@ php -S localhost:8000
 Depois acesse:
 
 ```text
-http://localhost:8000/login.php
+http://localhost:8000
 ```
+
+A rota inicial redireciona automaticamente para o login ou para o painel quando já existe uma sessão.
 
 Também é possível usar Apache, desde que `public/` seja servido como raiz pública ou as rotas sejam ajustadas de acordo com o ambiente.
 
@@ -143,4 +145,14 @@ Há um roteiro funcional em:
 docs/testes/roteiro-teste-funcional.md
 ```
 
-A interface atual prioriza funcionamento. A etapa de refinamento visual e responsividade pode ser feita separadamente sem alterar o fluxo de negócio.
+## Interface visual
+
+A interface utiliza um design system próprio em tons de roxo e branco, com:
+
+- sidebar responsiva para cliente e desenvolvedor;
+- cards, filtros, formulários e alertas padronizados;
+- login e cadastro responsivos;
+- chat adaptado para desktop e celular;
+- estados visuais consistentes para projetos, propostas e contratações.
+
+Os principais estilos ficam em `public/css/` e possuem comentários por seção para facilitar manutenção e apresentação do código.

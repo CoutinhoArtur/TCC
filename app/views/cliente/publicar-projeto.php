@@ -438,6 +438,7 @@ function escaparPublicacao(
 
     </main>
 
+<script src="/js/ui.js" defer></script>
 </body>
 
 </html>

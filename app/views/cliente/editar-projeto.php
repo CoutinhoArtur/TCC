@@ -19,4 +19,5 @@ $categorias = ['site'=>'Site','sistema_web'=>'Sistema web','aplicativo_mobile'=>
 <div class="form-campo full"><label for="referencias_visuais">Referências visuais</label><textarea id="referencias_visuais" name="referencias_visuais"><?= eEditProj((string)($projeto['referencias_visuais']??'')) ?></textarea></div>
 <div class="form-campo full"><label for="observacoes">Observações</label><textarea id="observacoes" name="observacoes"><?= eEditProj((string)($projeto['observacoes']??'')) ?></textarea></div>
 </div><div class="form-acoes"><button class="botao-principal" type="submit">Salvar alterações</button></div></form>
-<?php endif; ?></main></body></html>
+<?php endif; ?></main><script src="/js/ui.js" defer></script>
+</body></html>

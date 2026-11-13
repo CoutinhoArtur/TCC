@@ -131,6 +131,10 @@ require_once __DIR__
 require_once __DIR__
     . '/../app/models/Mensagem.php';
 
+// Lista lateral de conversas usada apenas para compor a interface.
+require_once __DIR__
+    . '/../app/models/Conversa.php';
+
 
 // ----------------------------------------------------------
 // CRIAR MODEL
@@ -138,6 +142,9 @@ require_once __DIR__
 
 $mensagemModel =
     new Mensagem($pdo);
+
+$conversaModel =
+    new Conversa($pdo);
 
 
 // ==========================================================
@@ -358,6 +365,9 @@ $nomeUsuario = (string) (
     $usuario['nome'] ?? ''
 );
 
+
+$conversas =
+    $conversaModel->listarPorUsuario($usuarioId);
 
 $projetoTitulo = (string) (
     $participantes['projeto_titulo'] ?? ''

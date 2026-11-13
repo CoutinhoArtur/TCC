@@ -1,290 +1,77 @@
 <?php
-
 // ==========================================================
-// VIEW: CADASTRO DE USUÁRIO
+// VIEW: CADASTRO
 // ==========================================================
-// Esta página é responsável pela interface do cadastro.
-//
-// Ela utiliza variáveis preparadas pelo arquivo:
-//
-// public/cadastro.php
-//
-// Variáveis disponíveis:
-//
-// $mensagem
-// $sucesso
-// $dadosFormulario
-//
-// A View não realiza INSERT diretamente no banco.
+// Mantém RF01/RN02, porém a escolha de perfil foi transformada
+// nos grandes cartões previstos no protótipo.
 // ==========================================================
-
-
-// ----------------------------------------------------------
-// FUNÇÃO PARA EXIBIR TEXTO COM SEGURANÇA
-// ----------------------------------------------------------
-// htmlspecialchars() impede que textos digitados pelo
-// usuário sejam interpretados como HTML.
-//
-// Isso ajuda a evitar XSS.
-//
-// Exemplo:
-//
-// <script>alert('teste')</script>
-//
-// será exibido como texto na página.
-// ----------------------------------------------------------
-
 function escapar(string $valor): string
 {
-    return htmlspecialchars(
-        $valor,
-        ENT_QUOTES,
-        'UTF-8'
-    );
+    return htmlspecialchars($valor, ENT_QUOTES, 'UTF-8');
 }
 
+$tipoPreSelecionado = (string) ($_GET['tipo'] ?? ($dadosFormulario['tipo'] ?? ''));
 ?>
-
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Cadastro - Projeto Match</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta - SiteMatch</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <script src="/js/auth.js" defer></script>
+    <script src="/js/ui.js" defer></script>
 </head>
-
 <body>
-
-    <!-- =====================================================
-         CABEÇALHO
-         ===================================================== -->
-
-    <header>
-
-        <h1>Criar conta</h1>
-
-        <p>
-            Escolha seu perfil e comece a utilizar a plataforma.
-        </p>
-
+<div class="auth-page">
+    <header class="auth-top">
+        <a href="/" class="auth-logo" aria-label="SiteMatch">Site<span>Match</span></a>
+        <a href="/login.php" class="auth-back" aria-label="Voltar">←</a>
     </header>
 
-
-    <main>
-
-        <!-- =================================================
-             MENSAGEM DE SUCESSO OU ERRO
-             =================================================
-             A mensagem vem do AuthController.
-             ================================================= -->
+    <main class="auth-content">
+        <header class="auth-card-header">
+            <h1>Qual seu perfil?</h1>
+            <p>Escolha como você quer usar o SiteMatch</p>
+        </header>
 
         <?php if ($mensagem !== ''): ?>
-
-            <div role="alert">
-
-                <?= escapar($mensagem) ?>
-
-            </div>
-
+            <div class="auth-alert" role="alert" <?= $sucesso ? 'style="color:#0e684d;background:#eaf8f2;border-color:#ccecdf"' : '' ?>><?= escapar($mensagem) ?></div>
         <?php endif; ?>
 
+        <form method="POST" class="auth-form" data-loading>
+            <fieldset class="auth-fieldset">
+                <div class="auth-profile-options">
+                    <label class="auth-profile-option">
+                        <input type="radio" name="tipo" value="cliente" required <?= $tipoPreSelecionado === 'cliente' ? 'checked' : '' ?>>
+                        <span class="auth-profile-icon">▣</span>
+                        <strong>Sou empreendedor</strong>
+                        <small>Preciso de um projeto digital para o meu negócio</small>
+                        <span class="auth-profile-arrow">→</span>
+                    </label>
 
-        <!-- =================================================
-             FORMULÁRIO DE CADASTRO
-             =================================================
-             method="POST":
-             envia os dados no corpo da requisição.
-             ================================================= -->
-
-        <form method="POST">
-
-
-            <!-- =============================================
-                 NOME COMPLETO
-                 ============================================= -->
-
-            <div>
-
-                <label for="nome">
-                    Nome completo
-                </label>
-
-                <input
-                    type="text"
-                    id="nome"
-                    name="nome"
-                    maxlength="150"
-                    required
-                    value="<?= escapar($dadosFormulario['nome'] ?? '') ?>"
-                >
-
-            </div>
-
-
-            <!-- =============================================
-                 E-MAIL
-                 ============================================= -->
-
-            <div>
-
-                <label for="email">
-                    E-mail
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    maxlength="150"
-                    required
-                    value="<?= escapar($dadosFormulario['email'] ?? '') ?>"
-                >
-
-            </div>
-
-
-            <!-- =============================================
-                 SENHA
-                 ============================================= -->
-
-            <div>
-
-                <label for="senha">
-                    Senha
-                </label>
-
-                <input
-                    type="password"
-                    id="senha"
-                    name="senha"
-                    minlength="8"
-                    required
-                >
-
-                <small>
-                    Utilize pelo menos 8 caracteres.
-                </small>
-
-            </div>
-
-
-            <!-- =============================================
-                 CONFIRMAÇÃO DA SENHA
-                 ============================================= -->
-
-            <div>
-
-                <label for="confirmar_senha">
-                    Confirmar senha
-                </label>
-
-                <input
-                    type="password"
-                    id="confirmar_senha"
-                    name="confirmar_senha"
-                    minlength="8"
-                    required
-                >
-
-            </div>
-
-
-            <!-- =============================================
-                 TIPO DE USUÁRIO
-                 =============================================
-                 RN02:
-                 cada conta deve ser cliente ou desenvolvedor.
-                 ============================================= -->
-
-            <fieldset>
-
-                <legend>
-                    Como você deseja utilizar a plataforma?
-                </legend>
-
-
-                <!-- CLIENTE -->
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="tipo"
-                        value="cliente"
-                        required
-
-                        <?= ($dadosFormulario['tipo'] ?? '') === 'cliente'
-                            ? 'checked'
-                            : '' ?>
-                    >
-
-                    Sou cliente
-
-                </label>
-
-
-                <!-- DESENVOLVEDOR -->
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="tipo"
-                        value="desenvolvedor"
-                        required
-
-                        <?= ($dadosFormulario['tipo'] ?? '') === 'desenvolvedor'
-                            ? 'checked'
-                            : '' ?>
-                    >
-
-                    Sou desenvolvedor
-
-                </label>
-
+                    <label class="auth-profile-option">
+                        <input type="radio" name="tipo" value="desenvolvedor" required <?= $tipoPreSelecionado === 'desenvolvedor' ? 'checked' : '' ?>>
+                        <span class="auth-profile-icon">↔</span>
+                        <strong>Sou desenvolvedor</strong>
+                        <small>Quero encontrar projetos e novos clientes</small>
+                        <span class="auth-profile-arrow">→</span>
+                    </label>
+                </div>
             </fieldset>
 
-
-            <!-- =============================================
-                 BOTÃO DE ENVIO
-                 ============================================= -->
-
-            <button type="submit">
-
-                Criar conta
-
-            </button>
-
+            <section class="auth-card" style="margin-top:22px;">
+                <div class="auth-field"><label for="nome">Nome</label><input type="text" id="nome" name="nome" maxlength="150" autocomplete="name" placeholder="Seu nome completo" required value="<?= escapar($dadosFormulario['nome'] ?? '') ?>"></div>
+                <div class="auth-field"><label for="email">E-mail</label><input type="email" id="email" name="email" maxlength="150" autocomplete="email" placeholder="Exemplo123@gmail.com" required value="<?= escapar($dadosFormulario['email'] ?? '') ?>"></div>
+                <div class="auth-field"><label for="senha">Senha</label><div class="auth-password-wrap"><input type="password" id="senha" name="senha" minlength="8" autocomplete="new-password" placeholder="Mínimo de 8 caracteres" required><button type="button" class="senha-toggle" data-toggle-password="senha">Mostrar</button></div></div>
+                <div class="auth-field"><label for="confirmar_senha">Confirmar senha</label><div class="auth-password-wrap"><input type="password" id="confirmar_senha" name="confirmar_senha" minlength="8" autocomplete="new-password" placeholder="Digite novamente" required><button type="button" class="senha-toggle" data-toggle-password="confirmar_senha">Mostrar</button></div></div>
+                <div class="auth-submit-wrap" style="margin-top:18px;"><button type="submit" class="auth-submit">Criar conta</button></div>
+            </section>
         </form>
 
-
-        <!-- =================================================
-             LINK PARA LOGIN
-             =================================================
-             A página login.php será criada na próxima etapa.
-             ================================================= -->
-
-        <p>
-
-            Já possui uma conta?
-
-            <a href="login.php">
-                Entrar
-            </a>
-
-        </p>
-
+        <p class="auth-switch">Já tem uma conta? <a href="login.php">Entrar</a></p>
     </main>
-
+</div>
 </body>
-
 </html>

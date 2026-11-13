@@ -249,6 +249,89 @@ class DashboardDesenvolvedor
 
 
     // ======================================================
+    // LISTAR CONTRATAÇÕES ATIVAS DO DESENVOLVEDOR
+    // ======================================================
+    //
+    // O resumo já conta os projetos em execução, mas o
+    // dashboard também precisa mostrar QUAIS são eles.
+    //
+    // Incluímos contratações ainda não concluídas/canceladas.
+    // Quando existir uma mensagem de solicitação de ajustes
+    // posterior à última entrega, exibimos esse aviso no card.
+    //
+    // RN19 mantém a contratação em "em_andamento" depois
+    // dos ajustes; por isso o aviso é informativo e não altera
+    // o status oficial da contratação.
+    // ======================================================
+
+    public function listarContratacoesAtivas(
+        int $desenvolvedorId
+    ): array {
+
+        $sql = "
+            SELECT
+                c.id AS contratacao_id,
+                c.status AS contratacao_status,
+                c.data_inicio,
+                c.data_entrega,
+                c.valor_final,
+                c.prazo_final_dias,
+
+                p.id AS projeto_id,
+                p.titulo AS projeto_titulo,
+                p.categoria AS projeto_categoria,
+                p.status AS projeto_status,
+
+                prop.id AS proposta_id,
+                u.nome AS cliente_nome,
+
+                (
+                    SELECT m.conteudo
+                    FROM mensagens AS m
+                    WHERE m.proposta_id = prop.id
+                    AND m.conteudo LIKE 'Solicitação de ajustes:%'
+                    AND (
+                        c.data_entrega IS NULL
+                        OR m.enviada_em >= c.data_entrega
+                    )
+                    ORDER BY m.enviada_em DESC, m.id DESC
+                    LIMIT 1
+                ) AS ultima_solicitacao_ajustes
+
+            FROM contratacoes AS c
+
+            INNER JOIN propostas AS prop
+                ON prop.id = c.proposta_id
+
+            INNER JOIN projetos AS p
+                ON p.id = c.projeto_id
+
+            INNER JOIN clientes AS cli
+                ON cli.id = p.cliente_id
+
+            INNER JOIN usuarios AS u
+                ON u.id = cli.usuario_id
+
+            WHERE prop.desenvolvedor_id = ?
+
+            AND c.status IN (
+                'ativa',
+                'em_andamento',
+                'aguardando_confirmacao',
+                'ajustes_solicitados'
+            )
+
+            ORDER BY c.id DESC
+        ";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$desenvolvedorId]);
+
+        return $stmt->fetchAll();
+    }
+
+
+    // ======================================================
     // LISTAR PROJETOS DISPONÍVEIS
     // ======================================================
     //

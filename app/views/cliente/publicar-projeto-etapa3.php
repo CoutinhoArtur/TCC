@@ -359,6 +359,7 @@ function escaparEtapa3(
 
     </main>
 
+<script src="/js/ui.js" defer></script>
 </body>
 
 </html>

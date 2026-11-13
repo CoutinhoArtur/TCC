@@ -173,6 +173,21 @@ $resumo =
 
 
 // ==========================================================
+// BUSCAR CONTRATAÇÕES ATIVAS DO DESENVOLVEDOR
+// ==========================================================
+//
+// Além do contador, mostramos os projetos em que o
+// desenvolvedor já foi contratado e ainda está trabalhando.
+// ==========================================================
+
+$contratacoesAtivas =
+    $dashboardModel
+        ->listarContratacoesAtivas(
+            $desenvolvedorId
+        );
+
+
+// ==========================================================
 // BUSCAR PROJETOS DISPONÍVEIS
 // ==========================================================
 //
@@ -197,6 +212,7 @@ $projetosDisponiveis =
 //
 // $usuario
 // $resumo
+// $contratacoesAtivas
 // $projetosDisponiveis
 // ----------------------------------------------------------
 

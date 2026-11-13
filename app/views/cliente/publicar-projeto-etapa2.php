@@ -308,6 +308,7 @@ function escaparEtapa2(
 
     </main>
 
+<script src="/js/ui.js" defer></script>
 </body>
 
 </html>

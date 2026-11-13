@@ -1,311 +1,105 @@
 /* ==========================================================
-   PUBLICAÇÃO DE PROJETO / BRIEFING GUIADO
+   BRIEFING GUIADO / PROPOSTAS - SITEMATCH
    ==========================================================
-   Estilos utilizados nas etapas de criação de projeto.
-
-   Responsável por:
-   - estrutura da página;
-   - formulário;
-   - campos;
-   - botão de continuar;
-   - cabeçalho;
-   - indicação da etapa;
-   - responsividade.
+   Formulários longos usam um card central com borda roxa fina,
+   muito espaço em branco e ações destacadas, seguindo a
+   linguagem do protótipo de autenticação/detalhe.
    ========================================================== */
-
-
-/* ----------------------------------------------------------
-   FUNDO DA PÁGINA
-   ---------------------------------------------------------- */
-
-body {
-    background-color: #faf9fd;
-}
-
-
-/* ==========================================================
-   CONTAINER PRINCIPAL
-   ========================================================== */
-
+body { background:#fff; }
 .briefing-container {
-    width: min(900px, calc(100% - 40px));
-
+    position: relative;
+    width: min(980px, calc(100% - 40px));
     margin: 0 auto;
-
-    padding: 35px 0 60px;
+    padding: 34px 0 72px;
 }
-
-
-/* ==========================================================
-   VOLTAR
-   ========================================================== */
-
+.briefing-container::before {
+    content:"";
+    position: fixed;
+    left:-300px;
+    bottom:-250px;
+    width:430px;
+    height:430px;
+    border:2px solid rgba(134,43,204,.55);
+    border-radius:50%;
+    pointer-events:none;
+    z-index:-1;
+}
+.briefing-container::after {
+    content:"";
+    position: fixed;
+    right:-120px;
+    bottom:-150px;
+    width:260px;
+    height:250px;
+    border-radius:50%;
+    background:#8b00ee;
+    box-shadow:-55px -44px 0 #c19ce0;
+    pointer-events:none;
+    z-index:-1;
+}
 .briefing-voltar {
-    display: inline-flex;
-
-    align-items: center;
-
-    margin-bottom: 35px;
-
-    color: var(--cor-texto-secundario);
-
-    font-size: 15px;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:28px;
+    color:#322c38;
+    font-size:14px;
 }
-
-.briefing-voltar:hover {
-    color: var(--cor-primaria);
-}
-
-
-/* ==========================================================
-   CABEÇALHO
-   ========================================================== */
-
-.briefing-header {
-    margin-bottom: 30px;
-}
-
-
+.briefing-voltar:hover { color:var(--roxo-700); }
+.briefing-header { margin-bottom:24px; text-align:center; }
 .briefing-saudacao {
-    color: var(--cor-primaria);
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    margin-bottom: 8px;
+    display:inline-flex;
+    margin-bottom:8px;
+    color:var(--roxo-700);
+    font-size:13px;
+    font-weight:800;
 }
-
-
 .briefing-header h1 {
-    font-size: 36px;
-
-    line-height: 1.2;
-
-    margin-bottom: 12px;
+    margin-bottom:8px;
+    font-size:clamp(30px,4vw,40px);
+    letter-spacing:-.8px;
 }
-
-
 .briefing-header > p:last-child {
-    max-width: 650px;
-
-    color: var(--cor-texto-secundario);
-
-    font-size: 16px;
-
-    line-height: 1.5;
+    max-width:720px;
+    margin:0 auto;
+    color:#655f6a;
+    line-height:1.55;
 }
-
-
-/* ==========================================================
-   CARD DO FORMULÁRIO
-   ========================================================== */
-
 .briefing-card {
-    padding: 35px;
-
-    border: 1px solid #e2d8ff;
-
-    border-radius: 18px;
-
-    background-color: var(--branco);
-
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.04);
+    padding:38px 54px 44px;
+    border:1.5px solid #9b2de8;
+    border-radius:17px;
+    background:rgba(255,255,255,.98);
+    box-shadow:none;
 }
-
-
-/* ----------------------------------------------------------
-   INDICAÇÃO DA ETAPA
-   ---------------------------------------------------------- */
-
 .briefing-etapa {
-    display: inline-block;
-
-    margin-bottom: 12px;
-
-    padding: 7px 12px;
-
-    border-radius: 30px;
-
-    background-color: var(--cor-primaria-clara);
-
-    color: var(--cor-primaria);
-
-    font-size: 13px;
-
-    font-weight: 600;
+    display:inline-flex;
+    margin-bottom:15px;
+    padding:6px 12px;
+    border-radius:20px;
+    color:#7320b6;
+    background:#edd9fa;
+    font-size:12px;
+    font-weight:800;
 }
-
-
-.briefing-card h2 {
-    margin-bottom: 28px;
-
-    font-size: 24px;
+.briefing-card h2 { margin-bottom:28px; font-size:26px; }
+.campo { display:flex; flex-direction:column; gap:8px; margin-bottom:22px; }
+.campo label { color:#161219; font-size:16px; font-weight:700; }
+.campo small { color:#726b76; font-size:12px; }
+.campo input,.campo select,.campo textarea {
+    width:100%;
+    min-height:49px;
+    padding:12px 15px;
+    border:1.2px solid #ad53e9;
+    border-radius:14px;
+    background:#fff;
 }
-
-
-/* ==========================================================
-   CAMPOS DO FORMULÁRIO
-   ========================================================== */
-
-.campo {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 9px;
-
-    margin-bottom: 24px;
-}
-
-
-.campo label {
-    font-size: 15px;
-
-    font-weight: 600;
-}
-
-
-/* Texto auxiliar usado abaixo de perguntas. */
-
-.campo small {
-    color: var(--cor-texto-secundario);
-
-    font-size: 13px;
-}
-
-
-/* ----------------------------------------------------------
-   INPUT, SELECT E TEXTAREA
-   ---------------------------------------------------------- */
-
-.campo input,
-.campo select,
-.campo textarea {
-    width: 100%;
-
-    padding: 13px 15px;
-
-    border: 1px solid #d9d9d9;
-
-    border-radius: 10px;
-
-    background-color: var(--branco);
-
-    color: var(--cor-texto);
-
-    outline: none;
-
-    transition:
-        border-color 0.2s,
-        box-shadow 0.2s;
-}
-
-
-/* Quando o usuário seleciona o campo. */
-
-.campo input:focus,
-.campo select:focus,
-.campo textarea:focus {
-    border-color: var(--cor-primaria);
-
-    box-shadow: 0 0 0 3px rgba(108, 53, 255, 0.12);
-}
-
-
-/* Placeholder dos campos. */
-
-.campo input::placeholder,
-.campo textarea::placeholder {
-    color: #aaaaaa;
-}
-
-
-/* Textarea pode aumentar verticalmente,
-   mas não horizontalmente. */
-
-.campo textarea {
-    min-height: 130px;
-
-    resize: vertical;
-
-    line-height: 1.5;
-}
-
-
-/* ==========================================================
-   AÇÕES DO FORMULÁRIO
-   ========================================================== */
-
-.briefing-acoes {
-    display: flex;
-
-    justify-content: flex-end;
-
-    margin-top: 30px;
-}
-
-
-/* ----------------------------------------------------------
-   BOTÃO CONTINUAR
-   ---------------------------------------------------------- */
-
-.botao-continuar {
-    min-width: 160px;
-
-    padding: 13px 24px;
-
-    border-radius: 10px;
-
-    background-color: var(--cor-primaria);
-
-    color: var(--branco);
-
-    font-weight: 600;
-
-    transition:
-        opacity 0.2s,
-        transform 0.2s;
-}
-
-
-.botao-continuar:hover {
-    opacity: 0.9;
-
-    transform: translateY(-1px);
-}
-
-
-/* ==========================================================
-   RESPONSIVIDADE
-   ========================================================== */
-
-@media (max-width: 600px) {
-
-    .briefing-container {
-        width: min(100% - 28px, 900px);
-
-        padding-top: 25px;
-    }
-
-
-    .briefing-header h1 {
-        font-size: 28px;
-    }
-
-
-    .briefing-card {
-        padding: 24px 18px;
-    }
-
-
-    .briefing-acoes {
-        justify-content: stretch;
-    }
-
-
-    .botao-continuar {
-        width: 100%;
-    }
-
+.campo textarea { min-height:130px; resize:vertical; line-height:1.55; }
+.briefing-acoes { display:flex; justify-content:flex-end; gap:10px; margin-top:30px; }
+.botao-continuar { min-width:180px; }
+@media(max-width:620px){
+    .briefing-container{width:min(100% - 26px,980px);padding-top:22px}
+    .briefing-card{padding:25px 17px}
+    .briefing-acoes{flex-direction:column;align-items:stretch}
+    .briefing-acoes>*{width:100%}
 }

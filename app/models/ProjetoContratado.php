@@ -75,6 +75,18 @@ class ProjetoContratado
                 ud.nome AS desenvolvedor_nome,
                 d.id AS desenvolvedor_id,
                 d.titulo_profissional,
+                (
+                    SELECT m.conteudo
+                    FROM mensagens AS m
+                    WHERE m.proposta_id = prop.id
+                    AND m.conteudo LIKE 'Solicitação de ajustes:%'
+                    AND (
+                        c.data_entrega IS NULL
+                        OR m.enviada_em >= c.data_entrega
+                    )
+                    ORDER BY m.enviada_em DESC, m.id DESC
+                    LIMIT 1
+                ) AS ultima_solicitacao_ajustes,
                 a.id AS avaliacao_id,
                 a.nota AS avaliacao_nota,
                 a.comentario AS avaliacao_comentario
