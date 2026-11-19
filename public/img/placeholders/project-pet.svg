@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Projeto de pet shop">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0F766E"/><stop offset="1" stop-color="#5EEAD4"/></linearGradient></defs>
+<rect width="640" height="480" rx="36" fill="url(#g)"/><rect x="86" y="82" width="468" height="316" rx="32" fill="#fff" opacity=".95"/>
+<path d="M170 210c-12-34-42-42-64-18s-10 58 11 73c16 12 37 11 53-4" fill="#A7F3D0"/>
+<path d="M470 210c12-34 42-42 64-18s10 58-11 73c-16 12-37 11-53-4" fill="#A7F3D0"/>
+<ellipse cx="320" cy="253" rx="149" ry="116" fill="#E0F2FE"/>
+<ellipse cx="252" cy="220" rx="26" ry="32" fill="#0F766E"/><ellipse cx="388" cy="220" rx="26" ry="32" fill="#0F766E"/>
+<ellipse cx="320" cy="273" rx="38" ry="24" fill="#0F766E"/>
+<path d="M294 305q26 25 52 0" fill="none" stroke="#0F766E" stroke-width="12" stroke-linecap="round"/>
+<circle cx="198" cy="118" r="16" fill="#99F6E4"/><circle cx="242" cy="98" r="13" fill="#99F6E4"/><circle cx="285" cy="105" r="11" fill="#99F6E4"/>
+</svg>

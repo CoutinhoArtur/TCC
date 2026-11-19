@@ -11,6 +11,8 @@
 /** @var array<int,array<string,mixed>> $contratacoesAtivas */
 /** @var array<int,array<string,mixed>> $projetosDisponiveis */
 
+require_once __DIR__ . '/../partials/visual-helpers.php';
+
 $contratacoesAtivas = $contratacoesAtivas ?? [];
 $projetosDisponiveis = $projetosDisponiveis ?? [];
 $nomeUsuario = (string)($usuario['nome'] ?? '');
@@ -24,6 +26,7 @@ function formatarDataProjeto(string $data): string {
 }
 $nomesCategorias = ['site'=>'Site institucional','sistema_web'=>'Sistema web','aplicativo_mobile'=>'Aplicativo mobile','sistema_desktop'=>'Sistema desktop','outro'=>'Outro'];
 $statusContratacaoNomes = ['ativa'=>'Aguardando início','em_andamento'=>'Em andamento','aguardando_confirmacao'=>'Aguardando confirmação','ajustes_solicitados'=>'Ajustes solicitados'];
+$avatarSidebar = smAvatarFromRecord($usuario, 'desenvolvedor');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -32,12 +35,20 @@ $statusContratacaoNomes = ['ativa'=>'Aguardando início','em_andamento'=>'Em and
     <title>Área do Desenvolvedor - SiteMatch</title>
     <link rel="stylesheet" href="/css/global.css"><link rel="stylesheet" href="/css/dashboard.css"><link rel="stylesheet" href="/css/functional.css">
     <script src="/js/ui.js" defer></script>
+    <!-- Acabamento visual compartilhado; nenhuma regra de negócio é executada aqui. -->
+    <link rel="stylesheet" href="/css/polish.css">
 </head>
 <body>
 <div class="dashboard">
     <aside class="sidebar">
         <a class="sidebar-logo" href="/desenvolvedor/dashboard.php">Site<span>Match</span></a>
-        <div class="sidebar-user"><strong><?= escaparDashboardDev($nomeUsuario) ?></strong><span>Desenvolvedor</span></div>
+        <div class="sidebar-user has-avatar">
+            <img class="sidebar-user-avatar" src="<?= escaparDashboardDev($avatarSidebar) ?>" alt="Avatar de <?= escaparDashboardDev($nomeUsuario) ?>" loading="lazy">
+            <div>
+                <strong><?= escaparDashboardDev($nomeUsuario) ?></strong>
+                <span>Desenvolvedor</span>
+            </div>
+        </div>
         <nav class="sidebar-nav"><ul>
             <li><a class="ativo" data-icon="⌂" href="dashboard.php">Início</a></li>
             <li><a data-icon="⌕" href="explorar-projetos.php">Explorar projetos</a></li>
@@ -74,9 +85,16 @@ $statusContratacaoNomes = ['ativa'=>'Aguardando início','em_andamento'=>'Em and
                     $status = (string)($contratacao['contratacao_status'] ?? '');
                     $ajuste = trim((string)($contratacao['ultima_solicitacao_ajustes'] ?? ''));
                     $categoria = (string)($contratacao['projeto_categoria'] ?? 'outro');
+                    $visualProjeto = smProjectVisual(
+                        (string)($contratacao['projeto_titulo'] ?? ''),
+                        $categoria,
+                        (string)($contratacao['descricao_resumida'] ?? '')
+                    );
                 ?>
                 <article class="project-row">
-                    <div class="project-thumb" data-category="<?= escaparDashboardDev($categoria) ?>"><?= strtoupper(substr((string)($contratacao['projeto_titulo'] ?? 'P'),0,1)) ?></div>
+                    <div class="project-thumb project-thumb-media" data-category="<?= escaparDashboardDev($categoria) ?>">
+                        <img src="<?= escaparDashboardDev($visualProjeto['src']) ?>" alt="<?= escaparDashboardDev($visualProjeto['alt']) ?>" loading="lazy">
+                    </div>
                     <div class="project-content">
                         <h3><?= escaparDashboardDev((string)($contratacao['projeto_titulo'] ?? '')) ?></h3>
                         <div class="project-meta-line"><span>Cliente: <strong><?= escaparDashboardDev((string)($contratacao['cliente_nome'] ?? '')) ?></strong></span><span>•</span><span><?= formatarValorProjeto((float)($contratacao['valor_final'] ?? 0)) ?></span><span>•</span><span>▣ <?= (int)($contratacao['prazo_final_dias'] ?? 0) ?> dias</span></div>
@@ -100,9 +118,16 @@ $statusContratacaoNomes = ['ativa'=>'Aguardando início','em_andamento'=>'Em and
                         $categoria = (string)($projeto['categoria'] ?? 'outro');
                         $min = (float)($projeto['orcamento_min'] ?? 0);
                         $max = (float)($projeto['orcamento_max'] ?? 0);
+                        $visualProjeto = smProjectVisual(
+                            (string)($projeto['titulo'] ?? ''),
+                            $categoria,
+                            (string)($projeto['descricao_resumida'] ?? '')
+                        );
                     ?>
                     <article class="project-row">
-                        <div class="project-thumb" data-category="<?= escaparDashboardDev($categoria) ?>"><?= strtoupper(substr((string)($projeto['titulo'] ?? 'P'),0,1)) ?></div>
+                        <div class="project-thumb project-thumb-media" data-category="<?= escaparDashboardDev($categoria) ?>">
+                            <img src="<?= escaparDashboardDev($visualProjeto['src']) ?>" alt="<?= escaparDashboardDev($visualProjeto['alt']) ?>" loading="lazy">
+                        </div>
                         <div class="project-content">
                             <h3><?= escaparDashboardDev((string)($projeto['titulo'] ?? '')) ?></h3>
                             <div class="project-meta-line"><span>◉ <?= escaparDashboardDev($nomesCategorias[$categoria] ?? $categoria) ?></span><span>•</span><span><?= formatarValorProjeto($min) ?><?= $max > 0 ? ' - '.formatarValorProjeto($max) : '' ?></span><span>•</span><span>▣ <?= formatarDataProjeto((string)($projeto['prazo_desejado'] ?? '')) ?></span></div>

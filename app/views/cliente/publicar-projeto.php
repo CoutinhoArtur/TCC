@@ -112,6 +112,8 @@ function escaparPublicacao(
         href="/css/publicar-projeto.css"
     >
 
+    <!-- Acabamento visual compartilhado; nenhuma regra de negócio é executada aqui. -->
+    <link rel="stylesheet" href="/css/polish.css">
 </head>
 
 

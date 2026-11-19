@@ -2,15 +2,21 @@
 /** @var array<string,mixed> $usuario */
 /** @var array<string,mixed> $perfil */
 /** @var array<int,array<string,mixed>> $habilidades */
+require_once __DIR__ . '/partials/visual-helpers.php';
+
 function ePerfil(string $valor): string { return htmlspecialchars($valor, ENT_QUOTES, 'UTF-8'); }
 $tipoUsuario=(string)($usuario['tipo']??'');
 $voltar=$tipoUsuario==='cliente'?'/cliente/dashboard.php':'/desenvolvedor/dashboard.php';
+$nomePerfil = (string)($perfil['nome'] ?? $usuario['nome'] ?? 'Usuário');
+$avatarPerfil = smAvatarFromRecord($perfil + $usuario, $tipoUsuario === 'cliente' ? 'cliente' : 'desenvolvedor');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Meu perfil - SiteMatch</title>
     <link rel="stylesheet" href="/css/global.css"><link rel="stylesheet" href="/css/functional.css"><script src="/js/ui.js" defer></script>
+    <!-- Acabamento visual compartilhado; nenhuma regra de negócio é executada aqui. -->
+    <link rel="stylesheet" href="/css/polish.css">
 </head>
 <body class="decorated-page">
 <main class="standalone-page"><div class="standalone-container">
@@ -19,6 +25,16 @@ $voltar=$tipoUsuario==='cliente'?'/cliente/dashboard.php':'/desenvolvedor/dashbo
 
     <?php if($mensagemSucesso!==''): ?><div class="alerta-sucesso" data-auto-hide><?= ePerfil($mensagemSucesso) ?></div><?php endif; ?>
     <?php if($mensagemErro!==''): ?><div class="alerta-erro"><?= ePerfil($mensagemErro) ?></div><?php endif; ?>
+
+    <!-- Resumo visual do perfil: melhora a apresentação sem alterar o processamento do formulário. -->
+    <section class="profile-summary-card">
+        <div class="profile-summary-media"><img src="<?= ePerfil($avatarPerfil) ?>" alt="Foto de perfil de <?= ePerfil($nomePerfil) ?>" loading="lazy"></div>
+        <div class="profile-summary-meta">
+            <h2><?= ePerfil($nomePerfil) ?></h2>
+            <p><?= $tipoUsuario==='cliente' ? 'Empreendedor' : ePerfil((string)($perfil['titulo_profissional'] ?? 'Desenvolvedor')) ?></p>
+            <span class="project-chip"><?= $tipoUsuario==='cliente' ? 'Perfil do cliente' : 'Perfil profissional' ?></span>
+        </div>
+    </section>
 
     <form method="POST" class="form-card" data-loading>
         <div class="form-grid">

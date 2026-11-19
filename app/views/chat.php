@@ -5,6 +5,8 @@
 // A tela foi reorganizada para seguir o protótipo: lista de
 // conversas à esquerda e conversa ativa à direita.
 // ==========================================================
+require_once __DIR__ . '/partials/visual-helpers.php';
+
 function escaparChat(string $valor): string { return htmlspecialchars($valor, ENT_QUOTES, 'UTF-8'); }
 function horarioChat(string $data): string {
     if ($data==='') return '';
@@ -15,13 +17,15 @@ $statusExibicao=$statusAmigaveis[$propostaStatus]??$propostaStatus;
 $conversas=$conversas??[];
 $outroNome='Contato';
 foreach($conversas as $c){ if((int)($c['proposta_id']??0)===$propostaId){$outroNome=(string)($c['outro_usuario_nome']??'Contato');break;} }
-$iniciais=''; foreach(array_slice(preg_split('/\s+/',trim($outroNome)) ?: [],0,2) as $parte){$iniciais.=mb_strtoupper(mb_substr($parte,0,1));}
+$avatarContato = smAvatarPath('user');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Conversas - SiteMatch</title>
     <link rel="stylesheet" href="/css/global.css"><link rel="stylesheet" href="/css/chat.css"><script src="/js/ui.js" defer></script>
+    <!-- Acabamento visual compartilhado; nenhuma regra de negócio é executada aqui. -->
+    <link rel="stylesheet" href="/css/polish.css">
 </head>
 <body>
 <div class="chat-page">
@@ -37,10 +41,9 @@ $iniciais=''; foreach(array_slice(preg_split('/\s+/',trim($outroNome)) ?: [],0,2
                     <?php foreach($conversas as $conversa):
                         $pid=(int)($conversa['proposta_id']??0);
                         $nome=(string)($conversa['outro_usuario_nome']??'Contato');
-                        $in=''; foreach(array_slice(preg_split('/\s+/',trim($nome)) ?: [],0,2) as $parte){$in.=mb_strtoupper(mb_substr($parte,0,1));}
                     ?>
                     <a class="chat-conversation-item <?= $pid===$propostaId?'ativa':'' ?>" href="/chat.php?proposta=<?= $pid ?>">
-                        <div class="chat-avatar"><?= escaparChat($in?:'SM') ?></div>
+                        <div class="chat-avatar chat-avatar-media"><img src="<?= escaparChat($avatarContato) ?>" alt="Avatar de <?= escaparChat($nome) ?>" loading="lazy"></div>
                         <div class="chat-conversation-text"><strong><?= escaparChat($nome) ?></strong><p><?= escaparChat((string)($conversa['ultima_mensagem']??'Conversa do projeto')) ?></p></div>
                         <div class="chat-conversation-time"><?= escaparChat(horarioChat((string)($conversa['ultima_mensagem_em']??''))) ?><?php if((int)($conversa['nao_lidas']??0)>0): ?><div class="chat-unread"><?= (int)$conversa['nao_lidas'] ?></div><?php endif; ?></div>
                     </a>
@@ -51,7 +54,7 @@ $iniciais=''; foreach(array_slice(preg_split('/\s+/',trim($outroNome)) ?: [],0,2
 
         <main class="chat-main">
             <header class="chat-header">
-                <div class="chat-header-person"><div class="chat-avatar"><?= escaparChat($iniciais?:'SM') ?></div><div class="chat-header-info"><h1><?= escaparChat($outroNome) ?></h1><p><?= escaparChat($projetoTitulo) ?> · <?= escaparChat($statusExibicao) ?></p></div></div>
+                <a class="chat-mobile-back" href="/mensagens.php" aria-label="Voltar para conversas">←</a><div class="chat-header-person"><div class="chat-avatar chat-avatar-media"><img src="<?= escaparChat($avatarContato) ?>" alt="Avatar de <?= escaparChat($outroNome) ?>" loading="lazy"></div><div class="chat-header-info"><h1><?= escaparChat($outroNome) ?></h1><p><?= escaparChat($projetoTitulo) ?> · <?= escaparChat($statusExibicao) ?></p></div></div>
                 <a class="botao-secundario" href="/painel.php">Voltar ao painel</a>
             </header>
 
@@ -78,9 +81,5 @@ $iniciais=''; foreach(array_slice(preg_split('/\s+/',trim($outroNome)) ?: [],0,2
         </main>
     </div>
 </div>
-<script>
-// Mantém a conversa posicionada na mensagem mais recente.
-document.addEventListener('DOMContentLoaded',()=>{const area=document.querySelector('#chat-mensagens');if(area)area.scrollTop=area.scrollHeight;});
-</script>
 </body>
 </html>

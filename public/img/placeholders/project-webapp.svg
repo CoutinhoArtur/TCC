@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Projeto de sistema web">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1D4ED8"/><stop offset="1" stop-color="#60A5FA"/></linearGradient></defs>
+  <rect width="640" height="480" rx="36" fill="url(#g)"/>
+  <rect x="88" y="98" width="464" height="284" rx="24" fill="#fff" opacity=".97"/>
+  <rect x="88" y="98" width="464" height="42" rx="24" fill="#DCEAFD"/>
+  <circle cx="124" cy="119" r="7" fill="#60A5FA"/>
+  <circle cx="146" cy="119" r="7" fill="#93C5FD"/>
+  <circle cx="168" cy="119" r="7" fill="#BFDBFE"/>
+  <rect x="118" y="168" width="130" height="170" rx="18" fill="#F3F7FF"/>
+  <rect x="270" y="168" width="250" height="52" rx="18" fill="#DBEAFE"/>
+  <rect x="270" y="236" width="118" height="102" rx="18" fill="#E0E7FF"/>
+  <rect x="402" y="236" width="118" height="102" rx="18" fill="#DBEAFE"/>
+</svg>

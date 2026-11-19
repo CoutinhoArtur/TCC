@@ -22,6 +22,8 @@ $tipoPreSelecionado = (string) ($_GET['tipo'] ?? ($dadosFormulario['tipo'] ?? ''
     <link rel="stylesheet" href="/css/auth.css">
     <script src="/js/auth.js" defer></script>
     <script src="/js/ui.js" defer></script>
+    <!-- Acabamento visual compartilhado; nenhuma regra de negócio é executada aqui. -->
+    <link rel="stylesheet" href="/css/polish.css">
 </head>
 <body>
 <div class="auth-page">

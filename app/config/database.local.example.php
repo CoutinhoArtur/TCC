@@ -8,4 +8,4 @@
 // enviado para o GitHub.
 
 $usuarioBanco = 'root';
-$senhaBanco = 'Senai@118';
+$senhaBanco = 'SUA_SENHA_AQUI';

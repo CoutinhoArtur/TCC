@@ -1,7 +1,10 @@
 <?php
+require_once __DIR__ . '/../partials/visual-helpers.php';
+
 function eExplorar(string $v): string { return htmlspecialchars($v, ENT_QUOTES, 'UTF-8'); }
 function dinheiroExplorar(float $v): string { return 'R$ '.number_format($v,2,',','.'); }
 $categorias = ['site'=>'Site institucional','sistema_web'=>'Sistema web','aplicativo_mobile'=>'Aplicativo mobile','sistema_desktop'=>'Sistema desktop','outro'=>'Outro'];
+$avatarSidebar = smAvatarFromRecord($usuario ?? [], 'desenvolvedor');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -10,12 +13,17 @@ $categorias = ['site'=>'Site institucional','sistema_web'=>'Sistema web','aplica
     <title>Explorar projetos - SiteMatch</title>
     <link rel="stylesheet" href="/css/global.css"><link rel="stylesheet" href="/css/dashboard.css"><link rel="stylesheet" href="/css/functional.css">
     <script src="/js/ui.js" defer></script>
+    <!-- Acabamento visual compartilhado; nenhuma regra de negócio é executada aqui. -->
+    <link rel="stylesheet" href="/css/polish.css">
 </head>
 <body>
 <div class="dashboard">
     <aside class="sidebar">
         <a class="sidebar-logo" href="dashboard.php">Site<span>Match</span></a>
-        <div class="sidebar-user"><strong><?= eExplorar((string)($usuario['nome']??'')) ?></strong><span>Desenvolvedor</span></div>
+        <div class="sidebar-user has-avatar">
+            <img class="sidebar-user-avatar" src="<?= eExplorar($avatarSidebar) ?>" alt="Avatar de <?= eExplorar((string)($usuario['nome']??'')) ?>" loading="lazy">
+            <div><strong><?= eExplorar((string)($usuario['nome']??'')) ?></strong><span>Desenvolvedor</span></div>
+        </div>
         <nav class="sidebar-nav"><ul>
             <li><a data-icon="⌂" href="dashboard.php">Início</a></li><li><a class="ativo" data-icon="⌕" href="explorar-projetos.php">Explorar projetos</a></li><li><a data-icon="▣" href="minhas-propostas.php">Minhas propostas</a></li><li><a data-icon="◎" href="/mensagens.php">Mensagens</a></li><li><a data-icon="◴" href="/historico.php">Histórico</a></li><li><a data-icon="♙" href="/perfil.php">Meu perfil</a></li><li class="menu-sair"><a data-icon="⇤" href="../logout.php">Sair</a></li>
         </ul></nav>
@@ -41,9 +49,16 @@ $categorias = ['site'=>'Site institucional','sistema_web'=>'Sistema web','aplica
             <h2><?= count($projetos) ?> projeto(s) encontrado(s)</h2>
             <?php if(empty($projetos)): ?><div class="projetos-vazio">Nenhum projeto aberto corresponde aos filtros.</div>
             <?php else: ?><div class="projetos-lista">
-                <?php foreach($projetos as $p): $cat=(string)($p['categoria']??'outro'); ?>
+                <?php foreach($projetos as $p):
+                    $cat=(string)($p['categoria']??'outro');
+                    $visualProjeto = smProjectVisual(
+                        (string)($p['titulo'] ?? ''),
+                        $cat,
+                        (string)($p['descricao_resumida'] ?? '')
+                    );
+                ?>
                 <article class="project-row">
-                    <div class="project-thumb" data-category="<?= eExplorar($cat) ?>"><?= strtoupper(substr((string)$p['titulo'],0,1)) ?></div>
+                    <div class="project-thumb project-thumb-media" data-category="<?= eExplorar($cat) ?>"><img src="<?= eExplorar($visualProjeto['src']) ?>" alt="<?= eExplorar($visualProjeto['alt']) ?>" loading="lazy"></div>
                     <div class="project-content">
                         <h3><?= eExplorar((string)$p['titulo']) ?></h3>
                         <div class="project-meta-line"><span>Cliente: <strong><?= eExplorar((string)$p['nome_cliente']) ?></strong></span><span>•</span><span><?= eExplorar($categorias[$cat]??$cat) ?></span><span>•</span><span><?= dinheiroExplorar((float)($p['orcamento_min']??0)) ?> - <?= dinheiroExplorar((float)($p['orcamento_max']??0)) ?></span></div>

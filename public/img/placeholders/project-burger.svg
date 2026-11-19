@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Projeto de hamburgueria">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4F46E5"/><stop offset="1" stop-color="#A78BFA"/></linearGradient></defs>
+  <rect width="640" height="480" rx="36" fill="url(#g)"/>
+  <circle cx="112" cy="84" r="74" fill="#fff" opacity=".12"/>
+  <rect x="78" y="76" width="184" height="316" rx="28" fill="#fff" opacity=".97"/>
+  <rect x="292" y="102" width="270" height="250" rx="28" fill="#231942" opacity=".82"/>
+  <ellipse cx="168" cy="172" rx="72" ry="26" fill="#F4BE63"/>
+  <path d="M100 173c10-36 41-63 68-63s58 27 68 63H100Z" fill="#D89A33"/>
+  <path d="M103 213h131c-4 18-16 29-36 34H138c-19-5-30-16-35-34Z" fill="#4C331B"/>
+  <rect x="113" y="190" width="110" height="18" rx="9" fill="#63B55F"/>
+  <rect x="118" y="208" width="100" height="10" rx="5" fill="#F1D95C"/>
+  <rect x="116" y="222" width="104" height="17" rx="8.5" fill="#A94E32"/>
+  <rect x="109" y="246" width="118" height="18" rx="9" fill="#F2C66E"/>
+  <g fill="#F4BE63"><rect x="340" y="140" width="170" height="22" rx="11"/><rect x="352" y="186" width="146" height="16" rx="8"/><rect x="340" y="230" width="178" height="18" rx="9"/><rect x="362" y="277" width="128" height="15" rx="7.5"/></g>
+  <g fill="#fff" opacity=".18"><rect x="104" y="292" width="132" height="12" rx="6"/><rect x="104" y="318" width="118" height="12" rx="6"/><rect x="104" y="344" width="101" height="12" rx="6"/></g>
+</svg>

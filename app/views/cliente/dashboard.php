@@ -11,6 +11,8 @@
 /** @var array<string,int>|null $resumo */
 /** @var array<int,array<string,mixed>>|null $projetosRecentes */
 
+require_once __DIR__ . '/../partials/visual-helpers.php';
+
 $usuario = $usuario ?? [];
 $resumo = $resumo ?? [];
 $projetosRecentes = $projetosRecentes ?? [];
@@ -37,6 +39,7 @@ $statusAmigaveis = [
     'em_andamento'=>'Em andamento','aguardando_confirmacao'=>'Aguardando confirmação',
     'concluido'=>'Concluído','cancelado'=>'Cancelado'
 ];
+$avatarSidebar = smAvatarFromRecord($usuario, 'cliente');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -48,12 +51,20 @@ $statusAmigaveis = [
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="/css/functional.css">
     <script src="/js/ui.js" defer></script>
+    <!-- Acabamento visual compartilhado; nenhuma regra de negócio é executada aqui. -->
+    <link rel="stylesheet" href="/css/polish.css">
 </head>
 <body>
 <div class="dashboard">
     <aside class="sidebar">
         <a class="sidebar-logo" href="/cliente/dashboard.php">Site<span>Match</span></a>
-        <div class="sidebar-user"><strong><?= escaparDashboardCliente($nomeUsuario) ?></strong><span>Empreendedor</span></div>
+        <div class="sidebar-user has-avatar">
+            <img class="sidebar-user-avatar" src="<?= escaparDashboardCliente($avatarSidebar) ?>" alt="Avatar de <?= escaparDashboardCliente($nomeUsuario) ?>" loading="lazy">
+            <div>
+                <strong><?= escaparDashboardCliente($nomeUsuario) ?></strong>
+                <span>Empreendedor</span>
+            </div>
+        </div>
         <nav class="sidebar-nav"><ul>
             <li><a class="ativo" data-icon="⌂" href="dashboard.php">Início</a></li>
             <li><a data-icon="▣" href="meus-projetos.php">Meus projetos</a></li>
@@ -103,9 +114,16 @@ $statusAmigaveis = [
                         $contratacaoId = (int)($projeto['contratacao_id'] ?? 0);
                         $min = isset($projeto['orcamento_min']) ? (float)$projeto['orcamento_min'] : null;
                         $max = isset($projeto['orcamento_max']) ? (float)$projeto['orcamento_max'] : null;
+                        $visualProjeto = smProjectVisual(
+                            (string)($projeto['titulo'] ?? ''),
+                            $categoria,
+                            (string)($projeto['descricao_resumida'] ?? '')
+                        );
                     ?>
                     <article class="project-row" data-project-card>
-                        <div class="project-thumb" data-category="<?= escaparDashboardCliente($categoria) ?>"><?= strtoupper(substr((string)($projeto['titulo'] ?? 'P'),0,1)) ?></div>
+                        <div class="project-thumb project-thumb-media" data-category="<?= escaparDashboardCliente($categoria) ?>">
+                            <img src="<?= escaparDashboardCliente($visualProjeto['src']) ?>" alt="<?= escaparDashboardCliente($visualProjeto['alt']) ?>" loading="lazy">
+                        </div>
                         <div class="project-content">
                             <h3><?= escaparDashboardCliente((string)($projeto['titulo'] ?? '')) ?></h3>
                             <div class="project-meta-line">

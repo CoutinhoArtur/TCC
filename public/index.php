@@ -52,6 +52,8 @@ if (isset($_SESSION['usuario'])) {
         @media(max-width:850px){ .landing-nav{gap:16px}.landing-links a:not(.cadastro){display:none}.landing-hero{grid-template-columns:1fr;padding-top:38px}.hero-art{min-height:420px}.landing-copy h1{font-size:50px}.laptop{left:45px;right:90px;top:70px}.phone{top:175px}.landing-benefits{gap:22px} }
         @media(max-width:520px){ .landing-nav{padding-inline:16px}.landing-hero{width:min(100% - 28px,1200px)}.landing-copy h1{font-size:43px}.landing-actions{flex-direction:column}.landing-actions a{width:100%}.hero-art{min-height:340px}.laptop{left:20px;right:60px;height:225px}.phone{width:92px;height:180px;right:0}.hero-note{display:none} }
     </style>
+    <!-- Acabamento visual compartilhado; nenhuma regra de negócio é executada aqui. -->
+    <link rel="stylesheet" href="/css/polish.css">
 </head>
 <body>
 <div class="landing">
@@ -82,17 +84,9 @@ if (isset($_SESSION['usuario'])) {
             </div>
         </section>
 
-        <section class="hero-art" aria-label="Visual da plataforma SiteMatch">
-            <div class="hero-blob"></div>
-            <div class="hero-note">Dê seu jeito com o<br>profissional ideal</div>
-            <div class="laptop">
-                <div class="laptop-screen">
-                    <div class="screen-brand">SiteMatch</div>
-                    <div class="screen-title">Transforme sua ideia em realidade digital</div>
-                    <span class="screen-pill">Buscar profissionais</span>
-                </div>
-            </div>
-            <div class="phone"><div class="phone-inner"><strong>Transforme sua ideia em realidade digital.</strong></div></div>
+        <!-- Imagem decorativa recortada da referência visual enviada para o TCC. -->
+        <section class="hero-art" aria-label="Ilustração de um site exibido em notebook e celular">
+            <img class="landing-hero-visual" src="/img/site-match-hero-referencia.webp" alt="Exemplo visual de um projeto web no notebook e no celular" width="567" height="511" loading="eager" fetchpriority="high">
         </section>
     </main>
 </div>
